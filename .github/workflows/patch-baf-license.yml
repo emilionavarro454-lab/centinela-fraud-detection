@@ -1,0 +1,57 @@
+name: Patch BAF license wording
+
+on:
+  push:
+    paths:
+      - '.github/workflows/patch-baf-license.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  patch-license-text:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Replace license wording in notebook markdown only
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          path = Path('TFM_Deteccion_Fraude_Emilio_Navarro.ipynb')
+          text = path.read_text(encoding='utf-8')
+
+          replacements = {
+              'El dataset se distribuye bajo licencia CC BY-NC-ND 4.0 para uso académico no comercial. Por este motivo, los archivos originales no se incluyen junto con el proyecto. En la Sección 2 se explica cómo obtenerlos y ubicarlos para reproducir el análisis.':
+              'La ficha del dataset en Kaggle indica una licencia CC BY-NC-SA 4.0. En este proyecto se opta por no redistribuir los archivos originales; en la Sección 2 se explica cómo obtenerlos y ubicarlos para reproducir el análisis.',
+              'El conjunto de datos tiene una licencia CC BY-NC-ND 4.0, que permite su uso académico, pero no su redistribución. Por esta razón, los archivos originales no se incluyen en el proyecto. Para reproducir el análisis, los archivos ZIP deben descargarse desde Kaggle y guardarse, sin descomprimir, en `MyDrive/TFM_Fraude/data/`.':
+              'La ficha del dataset en Kaggle indica una licencia CC BY-NC-SA 4.0. En este proyecto se opta por no redistribuir los archivos originales. Para reproducir el análisis, los archivos ZIP deben descargarse directamente desde Kaggle y guardarse, sin descomprimir, en `MyDrive/TFM_Fraude/data/`.'
+          }
+
+          for old, new in replacements.items():
+              count = text.count(old)
+              if count != 1:
+                  raise RuntimeError(f'Expected exactly one match, found {count}: {old[:80]}')
+              text = text.replace(old, new, 1)
+
+          path.write_text(text, encoding='utf-8')
+          PY
+
+      - name: Verify only notebook text changed
+        shell: bash
+        run: |
+          python -m json.tool TFM_Deteccion_Fraude_Emilio_Navarro.ipynb > /dev/null
+          git diff --check
+          git diff -- TFM_Deteccion_Fraude_Emilio_Navarro.ipynb
+
+      - name: Commit notebook wording correction
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add TFM_Deteccion_Fraude_Emilio_Navarro.ipynb
+          git commit -m 'Corrige texto de licencia BAF en notebook'
+          git push origin HEAD:master
