@@ -225,6 +225,21 @@ centinela-fraud-detection/
 
 ---
 
+## Entorno de ejecución: Google Colab y Google Drive
+
+El código y los artefactos del proyecto se versionan en este repositorio de GitHub. Los notebooks fueron desarrollados principalmente en **Google Colab**, utilizando **Google Drive como almacenamiento persistente durante la ejecución**. Por este motivo, algunas rutas del código apuntan a `MyDrive/TFM_Fraude/`: estas referencias son intencionales y corresponden al entorno utilizado para desarrollar y reproducir el TFM, no a dependencias externas ausentes del repositorio.
+
+Para reproducir el flujo completo en Colab:
+
+1. Copiar o clonar el repositorio en `MyDrive/TFM_Fraude/`.
+2. Descargar los archivos ZIP del Bank Account Fraud Dataset Suite desde Kaggle.
+3. Guardar los ZIP, sin descomprimir, en `MyDrive/TFM_Fraude/data/`.
+4. Abrir los notebooks en Google Colab, montar Google Drive y ejecutar las celdas en orden.
+
+GitHub actúa como repositorio versionado del código y de los artefactos de entrega; Google Drive se utiliza como almacenamiento persistente del entorno de ejecución en Colab. El archivo `config.ipynb` centraliza la resolución de rutas para facilitar la ejecución del proyecto tanto en Colab como en un entorno local compatible.
+
+---
+
 ## Instalación
 
 ### 1. Clonar el repositorio
@@ -266,7 +281,7 @@ El proyecto utiliza **Bank Account Fraud Dataset Suite (BAF)**, publicado por Fe
 
 El conjunto Base contiene aproximadamente **1 millón de solicitudes** y una prevalencia de fraude cercana al **1,1 %**. El análisis utiliza una estructura temporal de ocho meses.
 
-Los datos originales deben obtenerse desde su fuente oficial y utilizarse de acuerdo con las condiciones de licencia correspondientes. Este repositorio está orientado a documentar el código, resultados y artefactos desarrollados para el TFM.
+La ficha del dataset en Kaggle indica una licencia **CC BY-NC-SA 4.0**. En este proyecto se opta por no redistribuir los archivos originales: para reproducir el análisis deben descargarse directamente desde Kaggle y ubicarse en `MyDrive/TFM_Fraude/data/`, respetando las condiciones de la licencia. Este repositorio está orientado a documentar el código, resultados y artefactos desarrollados para el TFM.
 
 ---
 
