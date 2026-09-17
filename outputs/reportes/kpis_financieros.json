@@ -1,0 +1,13 @@
+{
+  "exposicion_fraude_base_test_$": 2316970.0,
+  "umbral_optimo_teorico": 0.01802451333813987,
+  "ahorro_optimo_teorico_$": 1642950.0,
+  "umbral_operacion": 0.03304821150855365,
+  "ahorro_operacion_$": 1558270.0,
+  "ahorro_IC95_$": [
+    1461495.5,
+    1654212.5
+  ],
+  "coste_revision_$": 10.0,
+  "alertas_dia_capacidad": 300
+}
