@@ -1,0 +1,40 @@
+# Entorno virtual
+venv/
+env/
+.venv/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+.ipynb_checkpoints/
+
+# Datos (no se redistribuyen por licencia CC BY-NC-ND del dataset BAF)
+data/
+*.csv
+*.csv.zip
+
+# Salidas generadas (se reproducen corriendo los notebooks)
+outputs/
+outputs/modelos/*.joblib
+outputs/figuras/
+outputs/reportes/
+outputs/dashboard/
+outputs/api/
+
+# Jupyter / Colab
+.ipynb_checkpoints
+*-checkpoint.ipynb
+
+# VS Code / editores
+.vscode/
+.idea/
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Variables de entorno / secretos
+.env
